@@ -1,0 +1,106 @@
+[gd_scene load_steps=12 format=3 uid="uid://glyph_level02"]
+
+[ext_resource type="Script" path="res://scripts/Level.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2"]
+[ext_resource type="Script" path="res://scripts/Goal.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/Hazard.gd" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/components/Coin.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/components/Spikes.tscn" id="6"]
+
+[sub_resource type="RectangleShape2D" id="p0"]
+size = Vector2(440, 40)
+
+[sub_resource type="RectangleShape2D" id="p1"]
+size = Vector2(300, 40)
+
+[sub_resource type="RectangleShape2D" id="land"]
+size = Vector2(380, 40)
+
+[sub_resource type="RectangleShape2D" id="goal"]
+size = Vector2(60, 130)
+
+[sub_resource type="RectangleShape2D" id="kill"]
+size = Vector2(3400, 100)
+
+[node name="Level02" type="Node2D"]
+script = ExtResource("1")
+
+[node name="P0" type="StaticBody2D" parent="."]
+position = Vector2(220, 600)
+
+[node name="Vis" type="Polygon2D" parent="P0"]
+color = Color(0.25, 0.28, 0.34, 1)
+polygon = PackedVector2Array(-220, -20, 220, -20, 220, 20, -220, 20)
+
+[node name="Col" type="CollisionShape2D" parent="P0"]
+shape = SubResource("p0")
+
+[node name="P1" type="StaticBody2D" parent="."]
+position = Vector2(720, 600)
+
+[node name="Vis" type="Polygon2D" parent="P1"]
+color = Color(0.27, 0.3, 0.37, 1)
+polygon = PackedVector2Array(-150, -20, 150, -20, 150, 20, -150, 20)
+
+[node name="Col" type="CollisionShape2D" parent="P1"]
+shape = SubResource("p1")
+
+[node name="Landing" type="StaticBody2D" parent="."]
+position = Vector2(1480, 720)
+
+[node name="Vis" type="Polygon2D" parent="Landing"]
+color = Color(0.25, 0.28, 0.34, 1)
+polygon = PackedVector2Array(-190, -20, 190, -20, 190, 20, -190, 20)
+
+[node name="Col" type="CollisionShape2D" parent="Landing"]
+shape = SubResource("land")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(100, 540)
+
+[node name="Player" parent="." instance=ExtResource("2")]
+position = Vector2(100, 540)
+current_shape = 1
+
+[node name="Spikes1" parent="." instance=ExtResource("6")]
+position = Vector2(510, 700)
+scale = Vector2(1.4, 1.5)
+
+[node name="Spikes2" parent="." instance=ExtResource("6")]
+position = Vector2(1080, 880)
+scale = Vector2(4, 1.6)
+
+[node name="Coin1" parent="." instance=ExtResource("5")]
+position = Vector2(510, 470)
+
+[node name="Coin2" parent="." instance=ExtResource("5")]
+position = Vector2(1050, 540)
+
+[node name="Coin3" parent="." instance=ExtResource("5")]
+position = Vector2(1250, 620)
+
+[node name="Goal" type="Area2D" parent="."]
+position = Vector2(1600, 635)
+script = ExtResource("3")
+
+[node name="Vis" type="Polygon2D" parent="Goal"]
+color = Color(0.3, 1, 0.6, 0.35)
+polygon = PackedVector2Array(-30, -65, 30, -65, 30, 65, -30, 65)
+
+[node name="Col" type="CollisionShape2D" parent="Goal"]
+shape = SubResource("goal")
+
+[node name="DeathZone" type="Area2D" parent="."]
+position = Vector2(800, 1000)
+script = ExtResource("4")
+
+[node name="Col" type="CollisionShape2D" parent="DeathZone"]
+shape = SubResource("kill")
+
+[node name="Hint" type="Label" parent="."]
+modulate = Color(1, 0.9, 0.45, 0.85)
+offset_left = 590.0
+offset_top = 450.0
+theme_override_font_sizes/font_size = 17
+text = "too far to jump — become 3 TRIANGLE
+and hold → to glide"

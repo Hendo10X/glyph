@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://glyph_movingplat"]
+
+[ext_resource type="Script" path="res://scripts/MovingPlatform.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="r1"]
+size = Vector2(140, 28)
+
+[sub_resource type="PhysicsMaterial" id="m1"]
+friction = 1.0
+rough = true
+
+[node name="MovingPlatform" type="AnimatableBody2D"]
+sync_to_physics = true
+physics_material_override = SubResource("m1")
+script = ExtResource("1")
+
+[node name="Vis" type="Polygon2D" parent="."]
+color = Color(0.45, 0.55, 0.7, 1)
+polygon = PackedVector2Array(-70, -14, 70, -14, 70, 14, -70, 14)
+
+[node name="Stripe" type="Polygon2D" parent="."]
+color = Color(0.6, 0.7, 0.85, 1)
+polygon = PackedVector2Array(-70, -14, 70, -14, 70, -9, -70, -9)
+
+[node name="Col" type="CollisionShape2D" parent="."]
+shape = SubResource("r1")
