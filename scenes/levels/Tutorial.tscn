@@ -1,111 +1,228 @@
-[gd_scene load_steps=11 format=3 uid="uid://glyph_tutorial"]
+[gd_scene load_steps=16 format=3 uid="uid://glyph_tutorial"]
 
 [ext_resource type="Script" path="res://scripts/Level.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2"]
 [ext_resource type="Script" path="res://scripts/Goal.gd" id="3"]
 [ext_resource type="Script" path="res://scripts/Hazard.gd" id="4"]
-[ext_resource type="PackedScene" path="res://scenes/components/PressurePlate.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/components/Coin.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/components/Door.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://scenes/components/PressurePlate.tscn" id="7"]
 
-[sub_resource type="RectangleShape2D" id="floor"]
-size = Vector2(860, 40)
+[sub_resource type="RectangleShape2D" id="r_1120_40"]
+size = Vector2(1120, 40)
 
-[sub_resource type="RectangleShape2D" id="land"]
-size = Vector2(440, 40)
+[sub_resource type="RectangleShape2D" id="r_480_40"]
+size = Vector2(480, 40)
 
-[sub_resource type="RectangleShape2D" id="goal"]
-size = Vector2(60, 130)
+[sub_resource type="RectangleShape2D" id="r_500_28"]
+size = Vector2(500, 28)
 
-[sub_resource type="RectangleShape2D" id="kill"]
-size = Vector2(3000, 100)
+[sub_resource type="RectangleShape2D" id="r_560_28"]
+size = Vector2(560, 28)
+
+[sub_resource type="RectangleShape2D" id="r_1040_40"]
+size = Vector2(1040, 40)
+
+[sub_resource type="RectangleShape2D" id="r_40_320"]
+size = Vector2(40, 320)
+
+[sub_resource type="RectangleShape2D" id="r_300_260"]
+size = Vector2(300, 260)
+
+[sub_resource type="RectangleShape2D" id="r_7060_120"]
+size = Vector2(7060, 120)
 
 [node name="Tutorial" type="Node2D"]
 script = ExtResource("1")
 
-[node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(380, 600)
+[node name="Plat1" type="StaticBody2D" parent="."]
+position = Vector2(480, 600)
 
-[node name="Vis" type="Polygon2D" parent="Floor"]
+[node name="Vis" type="Polygon2D" parent="Plat1"]
 color = Color(0.25, 0.28, 0.34, 1)
-polygon = PackedVector2Array(-430, -20, 430, -20, 430, 20, -430, 20)
+polygon = PackedVector2Array(-560, -20, 560, -20, 560, 20, -560, 20)
 
-[node name="Col" type="CollisionShape2D" parent="Floor"]
-shape = SubResource("floor")
+[node name="Lip" type="Polygon2D" parent="Plat1"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-560, -20, 560, -20, 560, -15, -560, -15)
 
-[node name="Landing" type="StaticBody2D" parent="."]
-position = Vector2(1250, 680)
+[node name="Col" type="CollisionShape2D" parent="Plat1"]
+shape = SubResource("r_1120_40")
 
-[node name="Vis" type="Polygon2D" parent="Landing"]
+[node name="Hint2" type="Label" parent="."]
+modulate = Color(0.62, 0.8, 1, 0.85)
+offset_left = 140
+offset_top = 380
+offset_right = 700
+theme_override_font_sizes/font_size = 17
+text = "MOVE  A / D          JUMP  SPACE"
+
+[node name="Hint3" type="Label" parent="."]
+modulate = Color(0.62, 0.8, 1, 0.85)
+offset_left = 140
+offset_top = 424
+offset_right = 700
+theme_override_font_sizes/font_size = 17
+text = "you are the CIRCLE — fast, bouncy, the highest jump"
+
+[node name="Coin4" parent="." instance=ExtResource("5")]
+position = Vector2(420, 530)
+
+[node name="Coin5" parent="." instance=ExtResource("5")]
+position = Vector2(620, 530)
+
+[node name="Plat6" type="StaticBody2D" parent="."]
+position = Vector2(1420, 600)
+
+[node name="Vis" type="Polygon2D" parent="Plat6"]
 color = Color(0.25, 0.28, 0.34, 1)
-polygon = PackedVector2Array(-220, -20, 220, -20, 220, 20, -220, 20)
+polygon = PackedVector2Array(-240, -20, 240, -20, 240, 20, -240, 20)
 
-[node name="Col" type="CollisionShape2D" parent="Landing"]
-shape = SubResource("land")
+[node name="Lip" type="Polygon2D" parent="Plat6"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-240, -20, 240, -20, 240, -15, -240, -15)
+
+[node name="Col" type="CollisionShape2D" parent="Plat6"]
+shape = SubResource("r_480_40")
+
+[node name="Hint7" type="Label" parent="."]
+modulate = Color(0.62, 0.8, 1, 0.85)
+offset_left = 1200
+offset_top = 380
+offset_right = 1760
+theme_override_font_sizes/font_size = 17
+text = "1 CUBE    2 CIRCLE    3 TRIANGLE"
+
+[node name="Plat8" type="StaticBody2D" parent="."]
+position = Vector2(2030, 464)
+
+[node name="Vis" type="Polygon2D" parent="Plat8"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-250, -14, 250, -14, 250, 14, -250, 14)
+
+[node name="Lip" type="Polygon2D" parent="Plat8"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-250, -14, 250, -14, 250, -9, -250, -9)
+
+[node name="Col" type="CollisionShape2D" parent="Plat8"]
+shape = SubResource("r_500_28")
+
+[node name="Hint9" type="Label" parent="."]
+modulate = Color(0.62, 0.8, 1, 0.85)
+offset_left = 1790
+offset_top = 280
+offset_right = 2350
+theme_override_font_sizes/font_size = 17
+text = "that ledge is high — only the CIRCLE jumps that far up"
+
+[node name="Coin10" parent="." instance=ExtResource("5")]
+position = Vector2(1900, 400)
+
+[node name="Coin11" parent="." instance=ExtResource("5")]
+position = Vector2(2060, 400)
+
+[node name="Plat12" type="StaticBody2D" parent="."]
+position = Vector2(3040, 484)
+
+[node name="Vis" type="Polygon2D" parent="Plat12"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-280, -14, 280, -14, 280, 14, -280, 14)
+
+[node name="Lip" type="Polygon2D" parent="Plat12"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-280, -14, 280, -14, 280, -9, -280, -9)
+
+[node name="Col" type="CollisionShape2D" parent="Plat12"]
+shape = SubResource("r_560_28")
+
+[node name="Hint13" type="Label" parent="."]
+modulate = Color(0.62, 0.8, 1, 0.85)
+offset_left = 2340
+offset_top = 300
+offset_right = 2900
+theme_override_font_sizes/font_size = 17
+text = "too wide to jump. shift 3 TRIANGLE and HOLD a direction
+in mid-air to glide across"
+
+[node name="Coin14" parent="." instance=ExtResource("5")]
+position = Vector2(2860, 420)
+
+[node name="Coin15" parent="." instance=ExtResource("5")]
+position = Vector2(3020, 420)
+
+[node name="Plat16" type="StaticBody2D" parent="."]
+position = Vector2(3980, 580)
+
+[node name="Vis" type="Polygon2D" parent="Plat16"]
+color = Color(0.25, 0.28, 0.34, 1)
+polygon = PackedVector2Array(-520, -20, 520, -20, 520, 20, -520, 20)
+
+[node name="Lip" type="Polygon2D" parent="Plat16"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-520, -20, 520, -20, 520, -15, -520, -15)
+
+[node name="Col" type="CollisionShape2D" parent="Plat16"]
+shape = SubResource("r_1040_40")
+
+[node name="Hint17" type="Label" parent="."]
+modulate = Color(0.62, 0.8, 1, 0.85)
+offset_left = 3480
+offset_top = 360
+offset_right = 4040
+theme_override_font_sizes/font_size = 17
+text = "only the CUBE is heavy enough to hold a plate down"
+
+[node name="Door18" parent="." instance=ExtResource("6")]
+position = Vector2(3980, 480)
+open_offset = Vector2(0, -184)
+
+[node name="Plate19" parent="." instance=ExtResource("7")]
+position = Vector2(3700, 560)
+door_path = NodePath("../Door18")
+min_mass = 3.50
+
+[node name="Coin20" parent="." instance=ExtResource("5")]
+position = Vector2(3820, 510)
+
+[node name="Plat21" type="StaticBody2D" parent="."]
+position = Vector2(4560, 460)
+
+[node name="Vis" type="Polygon2D" parent="Plat21"]
+color = Color(0.25, 0.28, 0.34, 1)
+polygon = PackedVector2Array(-20, -160, 20, -160, 20, 160, -20, 160)
+
+[node name="Lip" type="Polygon2D" parent="Plat21"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-20, -160, 20, -160, 20, -155, -20, -155)
+
+[node name="Col" type="CollisionShape2D" parent="Plat21"]
+shape = SubResource("r_40_320")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
-position = Vector2(90, 540)
+position = Vector2(110, 520)
 
 [node name="Player" parent="." instance=ExtResource("2")]
-position = Vector2(90, 540)
+position = Vector2(110, 520)
 current_shape = 1
 
-[node name="Door" parent="." instance=ExtResource("6")]
-position = Vector2(700, 500)
-
-[node name="Plate" parent="." instance=ExtResource("5")]
-position = Vector2(560, 580)
-door_path = NodePath("../Door")
-
 [node name="Goal" type="Area2D" parent="."]
-position = Vector2(1380, 595)
+position = Vector2(4270, 440)
 script = ExtResource("3")
 
 [node name="Vis" type="Polygon2D" parent="Goal"]
-color = Color(0.3, 1, 0.6, 0.35)
-polygon = PackedVector2Array(-30, -65, 30, -65, 30, 65, -30, 65)
+color = Color(0.3, 1, 0.6, 0.18)
+polygon = PackedVector2Array(-150, -130, 150, -130, 150, 130, -150, 130)
+
+[node name="Marker" type="Polygon2D" parent="Goal"]
+color = Color(0.3, 1, 0.6, 0.55)
+polygon = PackedVector2Array(136, -130, 150, -130, 150, 130, 136, 130)
 
 [node name="Col" type="CollisionShape2D" parent="Goal"]
-shape = SubResource("goal")
+shape = SubResource("r_300_260")
 
 [node name="DeathZone" type="Area2D" parent="."]
-position = Vector2(700, 920)
+position = Vector2(2250, 1100)
 script = ExtResource("4")
 
 [node name="Col" type="CollisionShape2D" parent="DeathZone"]
-shape = SubResource("kill")
-
-[node name="Sign1" type="Label" parent="."]
-offset_left = 60.0
-offset_top = 430.0
-theme_override_font_sizes/font_size = 22
-text = "MOVE  A / D     ·     JUMP  SPACE"
-
-[node name="Sign2" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0.7)
-offset_left = 60.0
-offset_top = 462.0
-theme_override_font_sizes/font_size = 16
-text = "the ring around you is the shift timer — keep shifting before it empties"
-
-[node name="Sign3" type="Label" parent="."]
-modulate = Color(0.6, 0.78, 1, 1)
-offset_left = 430.0
-offset_top = 430.0
-theme_override_font_sizes/font_size = 19
-text = "press 1 = CUBE (heavy)
-cross the plate to open the gate"
-
-[node name="Sign4" type="Label" parent="."]
-modulate = Color(1, 0.9, 0.45, 1)
-offset_left = 820.0
-offset_top = 440.0
-theme_override_font_sizes/font_size = 19
-text = "press 3 = TRIANGLE
-hold → to glide the gap"
-
-[node name="Sign5" type="Label" parent="."]
-modulate = Color(0.4, 1, 0.7, 1)
-offset_left = 1170.0
-offset_top = 560.0
-theme_override_font_sizes/font_size = 19
-text = "reach the goal!"
+shape = SubResource("r_7060_120")

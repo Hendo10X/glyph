@@ -1,0 +1,315 @@
+[gd_scene load_steps=22 format=3 uid="uid://glyph_level19"]
+
+[ext_resource type="Script" path="res://scripts/Level.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2"]
+[ext_resource type="Script" path="res://scripts/Goal.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/Hazard.gd" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/components/Door.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/components/PressurePlate.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://scenes/components/Spikes.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://scenes/components/MovingPlatform.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://scenes/components/Coin.tscn" id="9"]
+
+[sub_resource type="RectangleShape2D" id="r_1060_40"]
+size = Vector2(1060, 40)
+
+[sub_resource type="RectangleShape2D" id="r_1080_36"]
+size = Vector2(1080, 36)
+
+[sub_resource type="RectangleShape2D" id="r_280_24"]
+size = Vector2(280, 24)
+
+[sub_resource type="RectangleShape2D" id="r_300_28"]
+size = Vector2(300, 28)
+
+[sub_resource type="RectangleShape2D" id="r_205_28"]
+size = Vector2(205, 28)
+
+[sub_resource type="RectangleShape2D" id="r_320_28"]
+size = Vector2(320, 28)
+
+[sub_resource type="RectangleShape2D" id="r_320_26"]
+size = Vector2(320, 26)
+
+[sub_resource type="RectangleShape2D" id="r_460_28"]
+size = Vector2(460, 28)
+
+[sub_resource type="RectangleShape2D" id="r_500_28"]
+size = Vector2(500, 28)
+
+[sub_resource type="RectangleShape2D" id="r_40_560"]
+size = Vector2(40, 560)
+
+[sub_resource type="RectangleShape2D" id="r_300_260"]
+size = Vector2(300, 260)
+
+[sub_resource type="RectangleShape2D" id="r_9240_120"]
+size = Vector2(9240, 120)
+
+[node name="Level19" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Plat1" type="StaticBody2D" parent="."]
+position = Vector2(450, 600)
+
+[node name="Vis" type="Polygon2D" parent="Plat1"]
+color = Color(0.25, 0.28, 0.34, 1)
+polygon = PackedVector2Array(-530, -20, 530, -20, 530, 20, -530, 20)
+
+[node name="Lip" type="Polygon2D" parent="Plat1"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-530, -20, 530, -20, 530, -15, -530, -15)
+
+[node name="Col" type="CollisionShape2D" parent="Plat1"]
+shape = SubResource("r_1060_40")
+
+[node name="Door2" parent="." instance=ExtResource("5")]
+position = Vector2(560, 500)
+open_offset = Vector2(0, -184)
+
+[node name="Plate3" parent="." instance=ExtResource("6")]
+position = Vector2(300, 580)
+door_path = NodePath("../Door2")
+min_mass = 3.50
+
+[node name="Door4" parent="." instance=ExtResource("5")]
+position = Vector2(900, 500)
+open_offset = Vector2(0, -184)
+
+[node name="Plate5" parent="." instance=ExtResource("6")]
+position = Vector2(700, 580)
+door_path = NodePath("../Door4")
+min_mass = 3.50
+
+[node name="Spikes6" parent="." instance=ExtResource("7")]
+position = Vector2(650, 580)
+scale = Vector2(0.38, 1)
+
+[node name="Plat7" type="StaticBody2D" parent="."]
+position = Vector2(1560, 778)
+
+[node name="Vis" type="Polygon2D" parent="Plat7"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-540, -18, 540, -18, 540, 18, -540, 18)
+
+[node name="Lip" type="Polygon2D" parent="Plat7"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-540, -18, 540, -18, 540, -13, -540, -13)
+
+[node name="Col" type="CollisionShape2D" parent="Plat7"]
+shape = SubResource("r_1080_36")
+
+[node name="Spikes8" parent="." instance=ExtResource("7")]
+position = Vector2(1560, 760)
+scale = Vector2(6.62, 1)
+
+[node name="Mov9" parent="." instance=ExtResource("8")]
+position = Vector2(1140, 540)
+travel = Vector2(700, 0)
+period = 7
+phase_offset = 0
+
+[node name="Plat10" type="StaticBody2D" parent="."]
+position = Vector2(2280, 532)
+
+[node name="Vis" type="Polygon2D" parent="Plat10"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-140, -12, 140, -12, 140, 12, -140, 12)
+
+[node name="Lip" type="Polygon2D" parent="Plat10"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-140, -12, 140, -12, 140, -7, -140, -7)
+
+[node name="Col" type="CollisionShape2D" parent="Plat10"]
+shape = SubResource("r_280_24")
+
+[node name="Plat11" type="StaticBody2D" parent="."]
+position = Vector2(3050, 514)
+
+[node name="Vis" type="Polygon2D" parent="Plat11"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-150, -14, 150, -14, 150, 14, -150, 14)
+
+[node name="Lip" type="Polygon2D" parent="Plat11"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-150, -14, 150, -14, 150, -9, -150, -9)
+
+[node name="Col" type="CollisionShape2D" parent="Plat11"]
+shape = SubResource("r_300_28")
+
+[node name="Coin12" parent="." instance=ExtResource("9")]
+position = Vector2(3050, 440)
+
+[node name="Plat13" type="StaticBody2D" parent="."]
+position = Vector2(3442.50, 444)
+
+[node name="Vis" type="Polygon2D" parent="Plat13"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-102.50, -14, 102.50, -14, 102.50, 14, -102.50, 14)
+
+[node name="Lip" type="Polygon2D" parent="Plat13"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-102.50, -14, 102.50, -14, 102.50, -9, -102.50, -9)
+
+[node name="Col" type="CollisionShape2D" parent="Plat13"]
+shape = SubResource("r_205_28")
+
+[node name="Plat14" type="StaticBody2D" parent="."]
+position = Vector2(3762.50, 316)
+
+[node name="Vis" type="Polygon2D" parent="Plat14"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-102.50, -14, 102.50, -14, 102.50, 14, -102.50, 14)
+
+[node name="Lip" type="Polygon2D" parent="Plat14"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-102.50, -14, 102.50, -14, 102.50, -9, -102.50, -9)
+
+[node name="Col" type="CollisionShape2D" parent="Plat14"]
+shape = SubResource("r_205_28")
+
+[node name="Plat15" type="StaticBody2D" parent="."]
+position = Vector2(4082.50, 188)
+
+[node name="Vis" type="Polygon2D" parent="Plat15"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-102.50, -14, 102.50, -14, 102.50, 14, -102.50, 14)
+
+[node name="Lip" type="Polygon2D" parent="Plat15"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-102.50, -14, 102.50, -14, 102.50, -9, -102.50, -9)
+
+[node name="Col" type="CollisionShape2D" parent="Plat15"]
+shape = SubResource("r_205_28")
+
+[node name="Plat16" type="StaticBody2D" parent="."]
+position = Vector2(4402.50, 60)
+
+[node name="Vis" type="Polygon2D" parent="Plat16"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-102.50, -14, 102.50, -14, 102.50, 14, -102.50, 14)
+
+[node name="Lip" type="Polygon2D" parent="Plat16"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-102.50, -14, 102.50, -14, 102.50, -9, -102.50, -9)
+
+[node name="Col" type="CollisionShape2D" parent="Plat16"]
+shape = SubResource("r_205_28")
+
+[node name="Plat17" type="StaticBody2D" parent="."]
+position = Vector2(4860, 60)
+
+[node name="Vis" type="Polygon2D" parent="Plat17"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-160, -14, 160, -14, 160, 14, -160, 14)
+
+[node name="Lip" type="Polygon2D" parent="Plat17"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-160, -14, 160, -14, 160, -9, -160, -9)
+
+[node name="Col" type="CollisionShape2D" parent="Plat17"]
+shape = SubResource("r_320_28")
+
+[node name="Spikes18" parent="." instance=ExtResource("7")]
+position = Vector2(4860, 46)
+scale = Vector2(1.75, 1)
+
+[node name="Plat19" type="StaticBody2D" parent="."]
+position = Vector2(4860, 99)
+
+[node name="Vis" type="Polygon2D" parent="Plat19"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-160, -13, 160, -13, 160, 13, -160, 13)
+
+[node name="Lip" type="Polygon2D" parent="Plat19"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-160, -13, 160, -13, 160, -8, -160, -8)
+
+[node name="Col" type="CollisionShape2D" parent="Plat19"]
+shape = SubResource("r_320_26")
+
+[node name="Mov20" parent="." instance=ExtResource("8")]
+position = Vector2(5260, 66)
+travel = Vector2(0, 220)
+period = 5
+phase_offset = 0
+
+[node name="Plat21" type="StaticBody2D" parent="."]
+position = Vector2(5690, 394)
+
+[node name="Vis" type="Polygon2D" parent="Plat21"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-230, -14, 230, -14, 230, 14, -230, 14)
+
+[node name="Lip" type="Polygon2D" parent="Plat21"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-230, -14, 230, -14, 230, -9, -230, -9)
+
+[node name="Col" type="CollisionShape2D" parent="Plat21"]
+shape = SubResource("r_460_28")
+
+[node name="Door22" parent="." instance=ExtResource("5")]
+position = Vector2(5800, 300)
+open_offset = Vector2(0, -184)
+
+[node name="Plate23" parent="." instance=ExtResource("6")]
+position = Vector2(5560, 380)
+door_path = NodePath("../Door22")
+min_mass = 3.50
+
+[node name="Plat24" type="StaticBody2D" parent="."]
+position = Vector2(6310, 334)
+
+[node name="Vis" type="Polygon2D" parent="Plat24"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-250, -14, 250, -14, 250, 14, -250, 14)
+
+[node name="Lip" type="Polygon2D" parent="Plat24"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-250, -14, 250, -14, 250, -9, -250, -9)
+
+[node name="Col" type="CollisionShape2D" parent="Plat24"]
+shape = SubResource("r_500_28")
+
+[node name="Plat25" type="StaticBody2D" parent="."]
+position = Vector2(6740, 340)
+
+[node name="Vis" type="Polygon2D" parent="Plat25"]
+color = Color(0.25, 0.28, 0.34, 1)
+polygon = PackedVector2Array(-20, -280, 20, -280, 20, 280, -20, 280)
+
+[node name="Lip" type="Polygon2D" parent="Plat25"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-20, -280, 20, -280, 20, -275, -20, -275)
+
+[node name="Col" type="CollisionShape2D" parent="Plat25"]
+shape = SubResource("r_40_560")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(110, 520)
+
+[node name="Player" parent="." instance=ExtResource("2")]
+position = Vector2(110, 520)
+current_shape = 0
+
+[node name="Goal" type="Area2D" parent="."]
+position = Vector2(6380, 200)
+script = ExtResource("3")
+
+[node name="Vis" type="Polygon2D" parent="Goal"]
+color = Color(0.3, 1, 0.6, 0.18)
+polygon = PackedVector2Array(-150, -130, 150, -130, 150, 130, -150, 130)
+
+[node name="Marker" type="Polygon2D" parent="Goal"]
+color = Color(0.3, 1, 0.6, 0.55)
+polygon = PackedVector2Array(136, -130, 150, -130, 150, 130, 136, 130)
+
+[node name="Col" type="CollisionShape2D" parent="Goal"]
+shape = SubResource("r_300_260")
+
+[node name="DeathZone" type="Area2D" parent="."]
+position = Vector2(3340, 1100)
+script = ExtResource("4")
+
+[node name="Col" type="CollisionShape2D" parent="DeathZone"]
+shape = SubResource("r_9240_120")

@@ -2,7 +2,7 @@ extends Area2D
 ## Power-up that tops up the Forced Chaos timer, buying the player time to hold an
 ## awkward shape through a puzzle (e.g. standing as the heavy Cube on a plate).
 
-@export var amount := 5.0
+@export var amount := 20.0
 
 @onready var _vis: Node2D = $Vis
 var _taken := false

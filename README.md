@@ -11,7 +11,14 @@ physics — to solve momentum-based puzzles and reach the goal before the timer 
 - **Cube** — stable and grippy; good for control and pushing.
 - **Triangle** — glides; used to cover gaps.
 
-Shifting shape resets the level timer, so pick your form deliberately.
+Every shape change resets the shift timer. Let it run out for a full minute and
+the game picks a shape for you — so commit to a form, but don't stall in it.
+
+## Lives
+
+You get **three lives per level**, shown top-left. Hitting a hazard costs one and
+sends you back to the level's spawn point with a brief moment of invulnerability.
+Lose all three and the run restarts from Level 1. Reaching a new level refills them.
 
 ## Getting started
 
@@ -24,7 +31,7 @@ Shifting shape resets the level timer, so pick your form deliberately.
 
 ## Project layout
 
-- `scenes/` — player, menus, and the 10 levels plus a tutorial.
+- `scenes/` — player, menus, and the 20 levels plus a tutorial.
 - `scenes/components/` — reusable pieces (coins, doors, platforms, hazards).
 - `scripts/` — gameplay logic (player, game manager, HUD, level components).
 - `resources/` — physics materials for each shape.

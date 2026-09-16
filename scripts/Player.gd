@@ -58,7 +58,9 @@ const JUMP_BUFFER := 0.12
 ## Forced Chaos timer. Counts down continuously; at zero a RANDOM shape is forced
 ## on the player. Crucially it resets on EVERY manual shift, so the pressure only
 ## bites players who hold/hesitate — never those who keep flowing between shapes.
-const CHAOS_TIME := 5.0
+## A full minute: long enough to actually read a puzzle and commit to a shape,
+## instead of being reshuffled mid-thought.
+const CHAOS_TIME := 60.0
 
 const MATERIALS := {
 	Shape.CUBE: preload("res://resources/mat_cube.tres"),
@@ -87,7 +89,7 @@ const SHAPE_COLOR := {
 
 ## Upper bound a TimeBonus can stack the Chaos timer to (gives breathing room to
 ## hold an awkward shape through a puzzle).
-const CHAOS_MAX := 12.0
+const CHAOS_MAX := 90.0
 
 signal shape_locked(shape: int)
 signal shape_unlocked(shape: int)
@@ -102,6 +104,7 @@ signal shape_unlocked(shape: int)
 	Shape.CIRCLE: $Visuals/Vis_Circle,
 	Shape.TRIANGLE: $Visuals/Vis_Triangle,
 }
+@onready var _visuals: Node2D = $Visuals
 @onready var _ground_check: RayCast2D = $GroundCheck
 @onready var _trail: Line2D = $Trail
 @onready var _shift_burst: CPUParticles2D = $ShiftBurst
@@ -181,7 +184,20 @@ func _physics_process(delta: float) -> void:
 	_process_jump(delta)
 	_process_chaos(delta)
 	_update_trail()
+	_update_invuln_flash()
 	_check_out_of_bounds()
+
+
+## Blink the body through the post-hit grace window so it reads as "I took a hit
+## and I'm briefly safe" rather than "nothing happened".
+func _update_invuln_flash() -> void:
+	if not is_instance_valid(_visuals):
+		return
+	if GameManager.is_invulnerable():
+		var on := fmod(float(Time.get_ticks_msec()) / 90.0, 2.0) < 1.0
+		_visuals.modulate.a = 1.0 if on else 0.3
+	elif _visuals.modulate.a < 1.0:
+		_visuals.modulate.a = 1.0
 
 
 ## Safety net so a body that clears every Hazard and sails off the level still
@@ -192,7 +208,7 @@ func _check_out_of_bounds() -> void:
 	# loose so big multi-screen levels don't false-trigger. Each level also has its
 	# own DeathZone band that catches falls sooner.
 	var p := global_position
-	if p.y > 1500.0 or p.x < -1500.0 or p.x > 4000.0:
+	if p.y > 1900.0 or p.x < -1200.0 or p.x > 9500.0:
 		GameManager.respawn()
 
 

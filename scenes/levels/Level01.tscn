@@ -1,96 +1,153 @@
-[gd_scene load_steps=12 format=3 uid="uid://glyph_level01"]
+[gd_scene load_steps=15 format=3 uid="uid://glyph_level01"]
 
 [ext_resource type="Script" path="res://scripts/Level.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2"]
 [ext_resource type="Script" path="res://scripts/Goal.gd" id="3"]
 [ext_resource type="Script" path="res://scripts/Hazard.gd" id="4"]
-[ext_resource type="PackedScene" path="res://scenes/components/Coin.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/components/Door.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/components/PressurePlate.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://scenes/components/Door.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://scenes/components/Coin.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://scenes/components/Spikes.tscn" id="8"]
 
-[sub_resource type="RectangleShape2D" id="floor"]
-size = Vector2(1560, 40)
+[sub_resource type="RectangleShape2D" id="r_1060_40"]
+size = Vector2(1060, 40)
 
-[sub_resource type="RectangleShape2D" id="block"]
-size = Vector2(90, 90)
+[sub_resource type="RectangleShape2D" id="r_640_40"]
+size = Vector2(640, 40)
 
-[sub_resource type="RectangleShape2D" id="goal"]
-size = Vector2(420, 320)
+[sub_resource type="RectangleShape2D" id="r_520_28"]
+size = Vector2(520, 28)
 
-[sub_resource type="RectangleShape2D" id="endwall"]
-size = Vector2(40, 340)
+[sub_resource type="RectangleShape2D" id="r_40_380"]
+size = Vector2(40, 380)
 
-[sub_resource type="RectangleShape2D" id="kill"]
-size = Vector2(3000, 100)
+[sub_resource type="RectangleShape2D" id="r_300_260"]
+size = Vector2(300, 260)
+
+[sub_resource type="RectangleShape2D" id="r_5000_120"]
+size = Vector2(5000, 120)
 
 [node name="Level01" type="Node2D"]
 script = ExtResource("1")
 
-[node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(720, 600)
+[node name="Plat1" type="StaticBody2D" parent="."]
+position = Vector2(450, 600)
 
-[node name="Vis" type="Polygon2D" parent="Floor"]
+[node name="Vis" type="Polygon2D" parent="Plat1"]
 color = Color(0.25, 0.28, 0.34, 1)
-polygon = PackedVector2Array(-780, -20, 780, -20, 780, 20, -780, 20)
+polygon = PackedVector2Array(-530, -20, 530, -20, 530, 20, -530, 20)
 
-[node name="Col" type="CollisionShape2D" parent="Floor"]
-shape = SubResource("floor")
+[node name="Lip" type="Polygon2D" parent="Plat1"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-530, -20, 530, -20, 530, -15, -530, -15)
+
+[node name="Col" type="CollisionShape2D" parent="Plat1"]
+shape = SubResource("r_1060_40")
+
+[node name="Door2" parent="." instance=ExtResource("5")]
+position = Vector2(660, 500)
+open_offset = Vector2(0, -184)
+
+[node name="Plate3" parent="." instance=ExtResource("6")]
+position = Vector2(380, 580)
+door_path = NodePath("../Door2")
+min_mass = 3.50
+
+[node name="Hint4" type="Label" parent="."]
+modulate = Color(0.62, 0.8, 1, 0.85)
+offset_left = 150
+offset_top = 420
+offset_right = 710
+theme_override_font_sizes/font_size = 17
+text = "the gate is too heavy to pass — become 1 CUBE and cross
+the plate to open it, then shift back to roll"
+
+[node name="Coin5" parent="." instance=ExtResource("7")]
+position = Vector2(250, 530)
+
+[node name="Coin6" parent="." instance=ExtResource("7")]
+position = Vector2(500, 530)
+
+[node name="Plat7" type="StaticBody2D" parent="."]
+position = Vector2(1440, 600)
+
+[node name="Vis" type="Polygon2D" parent="Plat7"]
+color = Color(0.25, 0.28, 0.34, 1)
+polygon = PackedVector2Array(-320, -20, 320, -20, 320, 20, -320, 20)
+
+[node name="Lip" type="Polygon2D" parent="Plat7"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-320, -20, 320, -20, 320, -15, -320, -15)
+
+[node name="Col" type="CollisionShape2D" parent="Plat7"]
+shape = SubResource("r_640_40")
+
+[node name="Spikes8" parent="." instance=ExtResource("8")]
+position = Vector2(1380, 580)
+scale = Vector2(1, 1)
+
+[node name="Coin9" parent="." instance=ExtResource("7")]
+position = Vector2(1380, 470)
+
+[node name="Plat10" type="StaticBody2D" parent="."]
+position = Vector2(2160, 514)
+
+[node name="Vis" type="Polygon2D" parent="Plat10"]
+color = Color(0.34, 0.38, 0.46, 1)
+polygon = PackedVector2Array(-260, -14, 260, -14, 260, 14, -260, 14)
+
+[node name="Lip" type="Polygon2D" parent="Plat10"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-260, -14, 260, -14, 260, -9, -260, -9)
+
+[node name="Col" type="CollisionShape2D" parent="Plat10"]
+shape = SubResource("r_520_28")
+
+[node name="Coin11" parent="." instance=ExtResource("7")]
+position = Vector2(2000, 450)
+
+[node name="Coin12" parent="." instance=ExtResource("7")]
+position = Vector2(2150, 450)
+
+[node name="Plat13" type="StaticBody2D" parent="."]
+position = Vector2(2500, 430)
+
+[node name="Vis" type="Polygon2D" parent="Plat13"]
+color = Color(0.25, 0.28, 0.34, 1)
+polygon = PackedVector2Array(-20, -190, 20, -190, 20, 190, -20, 190)
+
+[node name="Lip" type="Polygon2D" parent="Plat13"]
+color = Color(0.42, 0.46, 0.56, 1)
+polygon = PackedVector2Array(-20, -190, 20, -190, 20, -185, -20, -185)
+
+[node name="Col" type="CollisionShape2D" parent="Plat13"]
+shape = SubResource("r_40_380")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
-position = Vector2(100, 540)
+position = Vector2(110, 520)
 
 [node name="Player" parent="." instance=ExtResource("2")]
-position = Vector2(100, 540)
+position = Vector2(110, 520)
 current_shape = 1
 
-[node name="Door" parent="." instance=ExtResource("7")]
-position = Vector2(600, 500)
-
-[node name="Plate" parent="." instance=ExtResource("6")]
-position = Vector2(420, 580)
-door_path = NodePath("../Door")
-
-[node name="Coin1" parent="." instance=ExtResource("5")]
-position = Vector2(250, 540)
-
-[node name="Coin2" parent="." instance=ExtResource("5")]
-position = Vector2(820, 540)
-
-[node name="Coin3" parent="." instance=ExtResource("5")]
-position = Vector2(1000, 540)
-
 [node name="Goal" type="Area2D" parent="."]
-position = Vector2(1150, 440)
+position = Vector2(2230, 380)
 script = ExtResource("3")
 
 [node name="Vis" type="Polygon2D" parent="Goal"]
 color = Color(0.3, 1, 0.6, 0.18)
-polygon = PackedVector2Array(-210, -160, 210, -160, 210, 160, -210, 160)
+polygon = PackedVector2Array(-150, -130, 150, -130, 150, 130, -150, 130)
 
 [node name="Marker" type="Polygon2D" parent="Goal"]
 color = Color(0.3, 1, 0.6, 0.55)
-polygon = PackedVector2Array(196, -160, 210, -160, 210, 160, 196, 160)
+polygon = PackedVector2Array(136, -130, 150, -130, 150, 130, 136, 130)
 
 [node name="Col" type="CollisionShape2D" parent="Goal"]
-shape = SubResource("goal")
-
-[node name="EndWall" type="StaticBody2D" parent="."]
-position = Vector2(1420, 450)
-
-[node name="Col" type="CollisionShape2D" parent="EndWall"]
-shape = SubResource("endwall")
+shape = SubResource("r_300_260")
 
 [node name="DeathZone" type="Area2D" parent="."]
-position = Vector2(720, 980)
+position = Vector2(1220, 1100)
 script = ExtResource("4")
 
 [node name="Col" type="CollisionShape2D" parent="DeathZone"]
-shape = SubResource("kill")
-
-[node name="Hint" type="Label" parent="."]
-modulate = Color(0.6, 0.78, 1, 0.85)
-offset_left = 250.0
-offset_top = 445.0
-theme_override_font_sizes/font_size = 17
-text = "the gate is too heavy to pass — become 1 CUBE
-and cross the plate to open it, then shift back to roll"
+shape = SubResource("r_5000_120")
